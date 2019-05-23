@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -53,6 +54,45 @@ public class JobData {
 
         return allJobs;
     }
+    public static ArrayList<HashMap<String, String>> findByValue(String search){
+        loadData();
+        ArrayList<HashMap<String, String>> positions = new ArrayList<>();
+
+       // for(HashMap<String, String> Row: allJobs){
+           // for (int i =0; i< Row.size();i++ ){
+                //for(Map.Entry<String, String> arow: Row.entrySet()){
+                   // if(arow.getValue().contains(search));
+                    //positions.add(allJobs.get(i));
+
+        for(int i=0; i < allJobs.size(); i++){
+
+            for (Map.Entry<String, String> Row: allJobs.get(i).entrySet()) {
+                String nRow = Row.getValue().toLowerCase();
+                String nsearch = search.toLowerCase();
+
+
+
+
+                if (nRow.contains(nsearch)) {
+
+                    if (positions.contains(allJobs.get(i))) {
+                    }
+
+                    else positions.add(allJobs.get(i));
+
+                }
+            }
+        }
+
+
+
+
+
+        return positions;
+
+    }
+
+
 
     /**
      * Returns results of search the jobs data by key/value, using
@@ -73,10 +113,12 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+            String new_value = value.toLowerCase();
 
             String aValue = row.get(column);
+            String new_aValue = aValue.toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (new_aValue.contains(new_value)) {
                 jobs.add(row);
             }
         }
